@@ -1,0 +1,38 @@
+apply from: "gradles/Version.gradle"
+
+ext {
+    dependencies = [
+            mvvm           : "com.github.hahajing0000.coreframwork:MVVMCore:$versions.ownframework",
+            common         : "com.github.hahajing0000.coreframwork:Common:$versions.ownframework",
+            log            : "com.github.hahajing0000.coreframwork:Logger:$versions.ownframework",
+            imageloader    : "com.github.hahajing0000.coreframwork:ImageLoader:$versions.ownframework",
+            storage        : "com.github.hahajing0000.coreframwork:Storage:$versions.ownframework",
+            msgbus         : "com.github.hahajing0000.coreframwork:MsgBus:$versions.ownframework",
+
+            retrofit       : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+            retrofitgson   : "com.squareup.retrofit2:converter-gson:$versions.retrofitgson",
+            retrofitrxjava : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofitrxjava",
+            okhttplog      : "com.squareup.okhttp3:logging-interceptor:$versions.okhttplog",
+            gson           : "com.google.code.gson:gson:$versions.gson",
+            rxandroid      : "io.reactivex.rxjava2:rxandroid:$versions.rxandroid",
+            rxjava         : "io.reactivex.rxjava2:rxjava:$versions.rxjava",
+            glide          : "com.github.bumptech.glide:glide:$versions.glide",
+            material       : "com.google.android.material:material:$versions.material",
+            banner         : "com.youth.banner:banner:$versions.banner",
+            room           : "androidx.room:room-runtime:$versions.room_version",
+            roomcompiler   : "androidx.room:room-compiler:$versions.room_version", // For Kotlin use kapt instead of annotationProcessor
+            smart          : "com.scwang.smart:refresh-layout-kernel:$versions.smart",      //核心必须依赖
+            smartradar     : "com.scwang.smart:refresh-header-radar:$versions.smart",       //雷达刷新头
+            smartball      : "com.scwang.smart:refresh-footer-ball:$versions.smart",      //球脉冲加载
+            arouter        : "com.alibaba:arouter-api:$versions.arouter",
+            aroutercompiler: "com.alibaba:arouter-compiler:$versions.aroutercompiler",
+            recyclerview   : "androidx.recyclerview:recyclerview:$versions.recyclerview",
+
+            bugly:"com.tencent.bugly:crashreport:latest.release",
+            buglynative:"com.tencent.bugly:nativecrashreport:latest.release",
+    ]
+
+    urls = [
+
+    ]
+}

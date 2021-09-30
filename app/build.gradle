@@ -1,0 +1,89 @@
+apply plugin: 'com.android.application'
+
+def libs = rootProject.ext.dependencies
+def appversoins = rootProject.ext.props
+android {
+    compileSdkVersion versions.compileSdkVersion
+    buildToolsVersion versions.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.baweigame.sprintnba"
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionCode appversoins.vc
+        versionName appversoins.vn
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'x86_64' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    flavorDimensions "app"
+    productFlavors {
+        dev {
+            dimension "app"
+            buildConfigField("String", "BASEURL", '"http://xx/xx"')
+            manifestPlaceholders = [app_id   : ""
+                                    , app_key: ""]
+        }
+        tes {
+            dimension "app"
+            buildConfigField("String", "BASEURL", '"http://xx/xx"')
+            manifestPlaceholders = [app_id   : ""
+                                    , app_key: ""]
+        }
+        pro {
+            dimension "app"
+            buildConfigField("String", "BASEURL", '"http://xx/xx"')
+            manifestPlaceholders = [app_id   : ""
+                                    , app_key: ""]
+        }
+    }
+}
+
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation project(path: ':Common')
+    implementation project(path: ':Resource')
+    implementation project(path: ':Weiget')
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //bugly
+    implementation libs.bugly
+    implementation libs.buglynative
+
+}
+
+//控制输出apk命名
+android.applicationVariants.all { variant ->
+    def newVerName = variant.versionName.replace(".", "_")
+    variant.outputs.all {
+        outputFileName = "sprintlive_vn${newVerName}_vc${variant.versionCode}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+        //"_${variant.buildType.name}"
+//                ".apk"
+    }
+}
+
+//获取编译时间
+static def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
