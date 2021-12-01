@@ -1,3 +1,5 @@
+include ':Net'
+include ':Home'
 include ':Weiget'
 include ':Common'
 include ':Resource'

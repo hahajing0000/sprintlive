@@ -1,21 +1,19 @@
 package com.baweigame.sprintnba.ui;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.widget.ImageView;
 
 import com.baweigame.common.tools.BitmapUtils;
 import com.baweigame.sprintnba.R;
-import com.baweigame.weiget.CountDownView;
 import com.baweigame.weiget.LoadingDialog;
+import com.baweigame.weiget.NewProgressView;
 import com.zy.mvvmcore.view.BaseActivity;
 
 import androidx.appcompat.widget.Toolbar;
 
 public class SplashActivity extends BaseActivity {
     private ImageView ivBg;
-    private CountDownView countDownView;
-
+    private NewProgressView npvSplash;
 
     int[] imgs = new int[]{
             R.mipmap.irving,
@@ -37,7 +35,12 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initEvent() {
-
+        npvSplash.setListener(new NewProgressView.NewProgressVeiwListener() {
+            @Override
+            public void finish() {
+                jumpToActivity(HomeActivity.class);
+            }
+        });
 
     }
 
@@ -53,26 +56,13 @@ public class SplashActivity extends BaseActivity {
         int index = (int) (Math.random() * imgs.length);
 
         ivBg.setImageResource(imgs[index]);
-        countDownView.start(5);
 
-        countDownView.setCallback(new CountDownView.StateListener() {
-            @Override
-            public void begin() {
-
-            }
-
-            @Override
-            public void end() {
-                jumpToActivity(HomeActivity.class);
-                finish();
-            }
-        });
     }
 
     @Override
     protected void initEnv() {
         ivBg = (ImageView) findViewById(R.id.ivBg);
-        countDownView = (CountDownView) findViewById(R.id.cdv_splash_view);
+        npvSplash = (NewProgressView) findViewById(R.id.npv_splash);
     }
 
     @Override

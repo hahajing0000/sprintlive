@@ -122,9 +122,6 @@ public class GuidePageActivity extends BaseActivity {
     protected int getPrimaryDarkColor() {
         //提取图片第一个像素点作为状态栏颜色
         int pixColor = BitmapUtils.getPixColor(getResources(), R.mipmap.guide1);
-//        int red = Color.red(pixColor);
-//        int green = Color.green(pixColor);
-//        int blue = Color.blue(pixColor);
         return pixColor;
     }
 

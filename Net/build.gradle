@@ -1,0 +1,69 @@
+apply plugin: 'com.android.library'
+
+def libs=rootProject.ext.dependencies
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        flavorDimensions "versionCode"
+    }
+
+    productFlavors{
+        'NBA'{
+            buildConfigField "String", "TENCENT_SERVER", "\"http://sportsnba.qq.com\""
+            buildConfigField "String", "TECENT_URL_SERVER", "\"http://vv.video.qq.com\""
+            buildConfigField "String", "TECENT_URL_SERVER_1", "\"http://h5vv.video.qq.com\""
+            buildConfigField "String", "HUPU_LOGIN_SERVER", "\"http://passport.hupu.com/\""
+            buildConfigField "String", "HUPU_FORUM_SERVER", "\"http://bbs.mobileapi.hupu.com/1/7.0.8/\""
+            buildConfigField "String", "HUPU_GAMES_SERVER", "\"http://games.mobileapi.hupu.com/1/7.0.8/\""
+            buildConfigField "String", "TMIAAO_SERVER", "\"http://nba.tmiaoo.com\""
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "TENCENT_SERVER", "\"http://sportsnba.qq.com\""
+            buildConfigField "String", "TECENT_URL_SERVER", "\"http://vv.video.qq.com\""
+            buildConfigField "String", "TECENT_URL_SERVER_1", "\"http://h5vv.video.qq.com\""
+            buildConfigField "String", "HUPU_LOGIN_SERVER", "\"http://passport.hupu.com/\""
+            buildConfigField "String", "HUPU_FORUM_SERVER", "\"http://bbs.mobileapi.hupu.com/1/7.0.8/\""
+            buildConfigField "String", "HUPU_GAMES_SERVER", "\"http://games.mobileapi.hupu.com/1/7.0.8/\""
+            buildConfigField "String", "TMIAAO_SERVER", "\"http://nba.tmiaoo.com\""
+        }
+        debug{
+            buildConfigField "String", "TENCENT_SERVER", "\"http://sportsnba.qq.com\""
+            buildConfigField "String", "TECENT_URL_SERVER", "\"http://vv.video.qq.com\""
+            buildConfigField "String", "TECENT_URL_SERVER_1", "\"http://h5vv.video.qq.com\""
+            buildConfigField "String", "HUPU_LOGIN_SERVER", "\"http://passport.hupu.com/\""
+            buildConfigField "String", "HUPU_FORUM_SERVER", "\"http://bbs.mobileapi.hupu.com/1/7.0.8/\""
+            buildConfigField "String", "HUPU_GAMES_SERVER", "\"http://games.mobileapi.hupu.com/1/7.0.8/\""
+            buildConfigField "String", "TMIAAO_SERVER", "\"http://nba.tmiaoo.com\""
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation project(path: ':Common')
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    api libs.retrofit
+    implementation libs.retrofitgson
+    implementation libs.retrofitrxjava
+    implementation libs.okhttplog
+}

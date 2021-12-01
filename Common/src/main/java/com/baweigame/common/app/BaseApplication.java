@@ -3,6 +3,8 @@ package com.baweigame.common.app;
 import android.app.Application;
 import android.content.Context;
 
+import com.baweigame.common.tools.LogUtils;
+
 /**
  * @ProjectName: SprintNBAMVVM
  * @Package: com.zy.common.app
