@@ -9,6 +9,7 @@ import com.nbasprint.net.okhttp.utils.SettingPrefUtils;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.List;
 
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -42,10 +43,11 @@ public class CustomInterceptor {
             Request oldRrequest = chain.request();
             HttpUrl oldUrl = oldRrequest.url();
             Request.Builder builder = oldRrequest.newBuilder();
-            String urlName = oldRrequest.header(Constant.BASEURL_KEY);
+            List<String> headers = oldRrequest.headers(Constant.BASEURL_KEY);
 
             HttpUrl newUrl=null;
-            if (!TextUtils.isEmpty(urlName.trim())){
+            if (headers!=null&&headers.size()>0&&!TextUtils.isEmpty(headers.get(0).trim())){
+                String urlName=headers.get(0).trim();
                 builder.removeHeader(Constant.BASEURL_KEY);
 
 
@@ -64,12 +66,12 @@ public class CustomInterceptor {
                 }else  if (Constant.BASEURL_SERVER_TMIAAO.equals(urlName)){
                     newUrl=HttpUrl.parse(BuildConfig.TMIAAO_SERVER);
                 }
-                //            oldUrl.newBuilder()
-//                    .scheme(newUrl.scheme())
-//                    .host(newUrl.host())
-//                    .port(newUrl.port())
-//                    .build();
-                Request newRequest = builder.url(newUrl).build();
+                HttpUrl finalUrl = oldUrl.newBuilder()
+                        .scheme(newUrl.scheme())
+                        .host(newUrl.host())
+                        .port(newUrl.port())
+                        .build();
+                Request newRequest = builder.url(finalUrl).build();
                 return chain.proceed(newRequest);
             }
             else{

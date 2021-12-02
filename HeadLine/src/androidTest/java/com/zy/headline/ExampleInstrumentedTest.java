@@ -1,4 +1,4 @@
-package com.zy.home;
+package com.zy.headline;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.zy.home.test", appContext.getPackageName());
+        assertEquals("com.zy.headline.test", appContext.getPackageName());
     }
 }

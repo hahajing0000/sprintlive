@@ -13,7 +13,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Common" />
-            <option value="$PROJECT_DIR$/Home" />
+            <option value="$PROJECT_DIR$/HeadLine" />
             <option value="$PROJECT_DIR$/Net" />
             <option value="$PROJECT_DIR$/Resource" />
             <option value="$PROJECT_DIR$/Weiget" />

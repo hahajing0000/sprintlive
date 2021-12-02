@@ -4,6 +4,7 @@ import com.baweigame.common.tools.LogUtils;
 import com.nbasprint.net.okhttp.interceptor.CustomInterceptor;
 import com.nbasprint.net.retrofit.calladapter.LiveDataCallAdapter;
 import com.nbasprint.net.retrofit.calladapter.LiveDataCallAdapterFactory;
+import com.nbasprint.net.retrofit.convertfactory.CustomGsonConverterFactory;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Handler;
@@ -68,7 +69,7 @@ public class RetrofitFactory {
                 .baseUrl(BuildConfig.TENCENT_SERVER)
                 .addCallAdapterFactory(LiveDataCallAdapterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(CustomGsonConverterFactory.create())
                 .client(createOkHttpClient())
                 .build();
     }
@@ -97,7 +98,7 @@ public class RetrofitFactory {
      */ 
     private OkHttpClient createOkHttpClient() {
         return new OkHttpClient.Builder()
-                .addNetworkInterceptor(new HttpLoggingInterceptor(new MyLogger()).setLevel(HttpLoggingInterceptor.Level.BODY))
+                .addNetworkInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .connectTimeout(Constant.TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(Constant.TIMEOUT,TimeUnit.SECONDS)
                 .readTimeout(Constant.TIMEOUT,TimeUnit.SECONDS)
@@ -114,10 +115,10 @@ public class RetrofitFactory {
      * @param 
      * @return 
      * @author zhangyue
-     * @time 2021/12/1 13:57
+     * @time 2021/12/1 14:31
      */ 
     private Interceptor createChangeBaseUrlInterceptor() {
-        return null;
+        return new CustomInterceptor.ChangeBaseUrlInterceptor();
     }
 
     /**

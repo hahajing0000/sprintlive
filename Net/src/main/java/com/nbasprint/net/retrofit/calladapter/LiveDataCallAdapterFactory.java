@@ -7,6 +7,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import retrofit2.Call;
 import retrofit2.CallAdapter;
 import retrofit2.Retrofit;
@@ -31,8 +32,8 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory  {
 
     @Override
     public CallAdapter<?, ?> get(Type returnType, Annotation[] annotations, Retrofit retrofit) {
-        Class<?> rawType= CallAdapter.Factory.getRawType(returnType);
-        if (rawType!= LiveData.class){
+        Class<?> rawType= getRawType(returnType);
+        if (rawType!= LiveData.class&&rawType!= MutableLiveData.class){
             Log.i("123", "this retrofit request is not call type LiveData");
             return null;
         }
@@ -41,7 +42,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory  {
             throw new IllegalStateException("returnType must be ParameterizedType");
         }
 
-        if (rawType!=LiveData.class&&rawType!= Call.class){
+        if (rawType!=LiveData.class&&rawType!=MutableLiveData.class&&rawType!= Call.class){
             throw new IllegalArgumentException("returnType must be LiveData or Call");
         }
 
@@ -49,7 +50,7 @@ public class LiveDataCallAdapterFactory extends CallAdapter.Factory  {
 
         if (rawType== Call.class){
             return new DefaultCallAdapter<>(t);
-        }else if (rawType==LiveData.class){
+        }else if (rawType==LiveData.class||rawType==MutableLiveData.class){
             return new LiveDataCallAdapter<>(t);
         }
         return new DefaultCallAdapter<>(t);
