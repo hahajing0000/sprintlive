@@ -1,12 +1,22 @@
-apply plugin: 'com.android.library'
+if (MATCHLIVE_COMPONENT.toBoolean()){
+    apply plugin: 'com.android.application'
+}
+else{
+    apply plugin: 'com.android.library'
+}
 
 def libs = rootProject.ext.dependencies
-
+def appversoins = rootProject.ext.props
 android {
     compileSdkVersion versions.compileSdkVersion
     buildToolsVersion versions.buildToolsVersion
 
     defaultConfig {
+        if (MATCHLIVE_COMPONENT.toBoolean()){
+            applicationId "com.zy.matchlive"
+        }
+
+
         minSdkVersion versions.minSdkVersion
         targetSdkVersion versions.targetSdkVersion
         versionCode 1
@@ -22,6 +32,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding{
+        enabled=true
+    }
+
+    sourceSets{
+        main{
+            if (MATCHLIVE_COMPONENT.toBoolean()){
+                manifest.srcFile 'src/main/component/AndroidManifest.xml'
+            }else{
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -31,23 +56,12 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation project(path: ':Common')
+    implementation project(path: ':Resource')
+    implementation project(path: ':Net')
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
-    api libs.mvvm
-    api libs.common
-    api libs.log
-    api libs.msgbus
-    api libs.imageloader
-    api libs.storage
-
-    api libs.retrofit
-    api libs.gson
-    api libs.rxjava
-    api libs.rxandroid
-    api libs.material
-    api libs.arouter
-    api libs.recyclerview
 
 }

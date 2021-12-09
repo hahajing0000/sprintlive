@@ -182,7 +182,6 @@ public class CustomInterceptor {
                     .addQueryParameter("appvid", "1.0.2.2")
                     .addQueryParameter("network", "wifi");
 
-
             Request newRequest = oldRequest.newBuilder()
                     .method(oldRequest.method(), oldRequest.body())
                     .url(authorizedUrlBuilder.build())

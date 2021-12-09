@@ -67,6 +67,9 @@ public class HeadLineTestActivity extends AppCompatActivity {
     }
 
     private void initEvent() {
+        /**
+         * 获取资讯列表信息
+         */
         btnHeadlineGetnewsindex.setOnClickListener(v -> {
 
             Flowable.create((FlowableOnSubscribe<NewsIndexEntity>) emitter -> {
@@ -119,7 +122,11 @@ public class HeadLineTestActivity extends AppCompatActivity {
             });
         });
 
+
         String id="20211130004899";
+        /**
+         * 获取资讯详情信息
+         */
         btnHeadlineGetdetailinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
