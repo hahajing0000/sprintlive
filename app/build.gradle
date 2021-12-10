@@ -53,6 +53,10 @@ android {
                                     , app_key: ""]
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 
@@ -63,6 +67,7 @@ dependencies {
     implementation project(path: ':Common')
     implementation project(path: ':Resource')
     implementation project(path: ':Weiget')
+    implementation project(path: ':Log')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
