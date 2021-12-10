@@ -1,5 +1,7 @@
 package com.baweigame.sprintnba.app;
 
+import android.content.pm.PackageManager;
+
 import com.baweigame.sprintnba.BuildConfig;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.baweigame.common.app.BaseApplication;
@@ -25,5 +27,11 @@ public class SprintNBAApp extends BaseApplication {
 
         //Bugly初始化
         CrashReport.initCrashReport(getApplicationContext(), ConstantValue.BUGLYAPPID, BuildConfig.DEBUG);
+
+//        try {
+//            String tag = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA).metaData.getString("Log_Tag");
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//        }
     }
 }

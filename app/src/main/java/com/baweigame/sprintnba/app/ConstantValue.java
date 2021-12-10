@@ -14,5 +14,5 @@ package com.baweigame.sprintnba.app;
  */
 public class ConstantValue {
     //Bugly AppId
-    public static String BUGLYAPPID="6f4b7e2280";
+    public static String BUGLYAPPID="676f80779f";
 }
